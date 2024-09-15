@@ -32,3 +32,10 @@ class PersonGenerator:
         birthday = self.birthday_generator()
         self.next_id += 1
         return Person(id, first_name, last_name, gender, birthday)
+
+
+class PersonDataFrameGenerator:
+    person_headers = ["id", "prénom", "nom", "date_naissance", "code_client"]
+    
+    def __init__(self):
+        pass
