@@ -20,7 +20,7 @@ data = [["id", "prénom", "nom", "genre", "date_naissance", "classe"]]
 for index in range(nb_pupils):
     id = index + 1
     gender = random.choice([fille, garcon])
-    class_level = random.randint(0, 6) + 1
+    class_level = random.randint(1, 7)
     days_delta = random.randint(class_level*380, class_level*380+450)
     date_of_birth = oldest_student + timedelta(days=days_delta)
     first_name = random.choice(first_names_female) if gender == fille else random.choice(first_names_male)

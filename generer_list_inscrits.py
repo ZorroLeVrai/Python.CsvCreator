@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+import fichiers_csv.generators.generator_tools as tools
 import csv
 import random
 
@@ -14,15 +15,16 @@ first_names_male = ["Gabriel", "Léo", "Raphaël", "Maël", "Louis", "Noah", "Ju
 last_names = ["Martin", "Bernard", "Thomas", "Petit", "Robert", "Richard", "Durand", "Dubois", "Moreau", "Laurent", "Simon", "Michel", "Lefebvre", "Leroy", "Roux", "David", "Bertrand", "Morel", "Fournier", "Girard", "Bonnet", "Dupont", "Lambert", "Fontaine", "Rousseau", "Vincent", "Muller", "Lefevre", "Faure", "Andre", "Mercier", "Blanc", "Guerin", "Boyer", "Garnier", "Chevalier", "Francois", "Legrand", "Gauthier", "Garcia", "Perrin", "Robin", "Clement", "Morin", "Nicolas", "Henry", "Roussel", "Mathieu", "Gautier", "Masson", "Marchand", "Duval", "Denis", "Dumont", "Marie", "Lemaire", "Noel", "Meyer", "Dufour", "Meunier", "Brun", "Blanchard", "Giraud", "Joly", "Riviere", "Lucas", "Brunet", "Gaillard", "Barbier", "Arnaud", "Martinez", "Gerard", "Roche", "Renard", "Schmitt", "Roy", "Leroux", "Colin", "Vidal", "Caron", "Picard", "Roger", "Fabre", "Aubert", "Lemoine", "Renaud", "Dumas", "Lacroix", "Olivier", "Philippe", "Bourgeois", "Pierre", "Benoit", "Rey", "Leclerc", "Payet", "Rolland", "Leclercq", "Guillaume", "Lecomte"]
 
 oldest_person = date(1960,1,1)
+youngest_person = date(2020,1,1)
 
 # Generate random data for the CSV file
 #person_list = [["id", "prénom", "nom", "genre", "date_naissance"]]
 person_list = []
+birthday_generator = tools.get_random_date_generator(oldest_person, youngest_person)
 for index in range(nb_persons):
     id = index + 1
     gender = random.choice([fille, garcon])
-    days_delta = random.randint(0, 40*365)
-    date_of_birth = oldest_person + timedelta(days=days_delta)
+    date_of_birth = birthday_generator()
     first_name = random.choice(first_names_female) if gender == fille else random.choice(first_names_male)
     last_name = random.choice(last_names)
     person_list.append([id, first_name, last_name, gender, date_of_birth])
