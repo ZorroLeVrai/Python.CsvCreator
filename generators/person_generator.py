@@ -1,12 +1,13 @@
 from .generator_tools import Gender, get_random_date_generator
 from . import generator_constants as cst
-from datetime import date, timedelta
+import generators.generator_tools as tools
 import random as rd
+from datetime import date
 
 
 class Person:
     def __init__(self, id, first_name, last_name, gender, birthday):
-        self.id = id
+        self.person_id = id
         self.first_name = first_name
         self.last_name = last_name
         self.gender = gender
@@ -24,7 +25,7 @@ class PersonGenerator:
             return rd.choice(cst.first_names_female)
         return rd.choice(cst.first_names_male)
 
-    def generate_person(self):
+    def create_person(self):
         id = self.next_id
         gender = rd.choice(list(Gender))
         first_name = self.generate_first_name(gender)
@@ -32,10 +33,3 @@ class PersonGenerator:
         birthday = self.birthday_generator()
         self.next_id += 1
         return Person(id, first_name, last_name, gender, birthday)
-
-
-class PersonDataFrameGenerator:
-    person_headers = ["id", "prénom", "nom", "date_naissance", "code_client"]
-    
-    def __init__(self):
-        pass

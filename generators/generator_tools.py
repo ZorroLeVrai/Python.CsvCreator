@@ -13,7 +13,7 @@ def generate_random_letter(is_upper):
         return rd.choice(string.ascii_uppercase)
     return rd.choice(string.ascii_lowercase)
 
-def generate_random_code(format: str):
+def generate_random_code(format: str) -> str:
     result = ""
     for format_item in format:
         match format_item:
