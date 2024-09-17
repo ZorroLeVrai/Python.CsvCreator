@@ -1,9 +1,14 @@
-from datetime import date, timedelta
-from enum import Enum
 import string
 import random as rd
+import os
+from datetime import date, timedelta
+from enum import Enum
 
+path_generation = "./fichiers_csv"
 Gender = Enum("Gender", ["Male", "Female"])
+
+def create_path(file_name):
+    return os.path.join(path_generation, file_name)
 
 def generate_random_digit_in_str():
     return str(rd.randint(0, 9))

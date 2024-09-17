@@ -1,5 +1,6 @@
 import pandas as pd
 import random as rd
+import generators.generator_tools as tools
 import generators.client_generator as clig
 import generators.address_generator as adrg
 import generators.account_generator as accg
@@ -26,10 +27,10 @@ def get_random_clients_to_create():
     return rd.choices(list(range(1,8)), [0.3, 0.1, 0.1, 0.4, 0.05, 0.04, 0.01], k=1)[0]
 
 def get_random_accounts_to_create():
-    return rd.choices(list(range(1,6)), [0.1, 0.7, 0.1, 0.07, 0.03], k=1)[0]
+    return rd.choices(list(range(1,6)), [0.45, 0.35, 0.11, 0.06, 0.03], k=1)[0]
 
 
-address_generator = create_address_generator(500)
+address_generator = create_address_generator(5000)
 client_df_generator = clig.ClientDataFrameGenerator(oldest_client, youngest_client)
 account_df_generator = accg.AccountDataFrameGenerator(bnp_country_code, bnp_bank_code, bnp_nb_agencies)
 #generate clients
@@ -45,6 +46,6 @@ df_addresses = address_generator.create_data_frame()
 df_clients = client_df_generator.create_data_frame()
 df_accounts = account_df_generator.create_data_frame()
 
-create_csv(df_addresses, "./adresses.csv")
-create_csv(df_clients, "./clients.csv")
-create_csv(df_accounts, "./accounts.csv")
+create_csv(df_addresses, tools.create_path("adresses.csv"))
+create_csv(df_clients, tools.create_path("clients.csv"))
+create_csv(df_accounts, tools.create_path("accounts.csv"))

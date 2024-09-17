@@ -1,6 +1,5 @@
 from .generator_tools import Gender, get_random_date_generator
 from . import generator_constants as cst
-import generators.generator_tools as tools
 import random as rd
 from datetime import date
 

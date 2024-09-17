@@ -48,9 +48,15 @@ class AccountGenerator:
         self.iban_generator = IbanGenerator(country_code, bank_code, nb_agencies)
         self.next_id = 1
 
+    @staticmethod
+    def generate_account_balance_in_cents():
+        min_value, max_value = rd.choices([(-500_000, -100_000), (-100_000, 0), (0, 50_000), (50_000, 200_000), (200_000, 1000_000), (1000_000, 10_000_000), (10_000_000, 100_000_000), (100_000_000, 1000_000_000)],  
+                          [10, 15, 45, 20, 9, 1, 0.1, 0.01], k=1)[0]
+        return rd.randint(min_value, max_value)
+
     def create_account(self, client_code) -> Account:
         new_iban = self.iban_generator.generate_iban()
-        amount_in_cents = rd.randint(-500_000, 1000_000_000)
+        amount_in_cents = self.generate_account_balance_in_cents()
         new_account = Account(self.next_id, new_iban, client_code, amount_in_cents)
         self.next_id += 1
         return new_account
